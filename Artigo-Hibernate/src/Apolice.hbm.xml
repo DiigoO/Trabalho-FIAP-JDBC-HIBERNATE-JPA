@@ -1,0 +1,34 @@
+<!-- stock.hbm.xml -->
+<hibernate-mapping>
+    <class name="br.com.fiap.entity.Apolice" table="APOLICE">
+        <id name="numeroApolice" type="java.lang.Integer" unsaved-value="0" >
+            <column name="NUMERO_APOLICE"  />
+            <generator class="identity" />
+        </id>
+        <property name="dataInicioVigencia" type="date">
+            <column name="INICIO_VIGENCIA" not-null="true" unique="false" />
+        </property>
+	    <property name="dataFinalVigencia" type="date">
+            <column name="FINAL_VIGENCIA" not-null="true" unique="false" />
+        </property>
+        
+	    <many-to-one name="segurado" class="br.com.fiap.entity.Segurado" 
+			column="ID_SEGURADO" cascade="all" fetch="select"/>			
+			
+<!-- 		 <list name="veiculos" table="VEICULO" -->
+<!-- 				inverse="true" lazy="true" fetch="select"> -->
+<!--             <key> -->
+<!--                 <column name="NUMERO_APOLICE" not-null="true" /> -->
+<!--             </key> -->
+<!--             <list-index></list-index> -->
+<!--             <one-to-many class="br.com.fiap.entity.Veiculo" /> -->
+<!--         </list> -->
+        
+        <list name="veiculos" inverse="true" lazy="true" cascade="all">
+			<key column="NUMERO_APOLICE" />
+			<list-index></list-index>
+			<one-to-many class="br.com.fiap.entity.Veiculo" />
+		</list>
+			
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<!-- stock.hbm.xml -->
+<hibernate-mapping>
+    <class name="br.com.fiap.entity.Veiculo" table="VEICULO">
+        <id name="id" type="java.lang.Integer" unsaved-value="0">
+            <column name="ID_VEICULO" />
+            <generator class="identity" />
+        </id>
+        <property name="codigoFipe" type="integer">
+            <column name="CODIGO_FIPE" not-null="true" unique="false" />
+        </property>
+        <property name="placa" type="string">
+            <column name="PLACA" length="7" not-null="true" unique="false" />
+        </property>
+        <property name="marca" type="string">
+            <column name="MARCA" length="50" not-null="true" unique="false" />
+        </property>
+        <property name="modelo" type="string">
+            <column name="MODELO" length="50" not-null="true" unique="false" />
+        </property>
+        <property name="valor" type="double">
+            <column name="VALOR_FIPE" not-null="true" unique="false" />
+        </property>
+	    <many-to-one name="apolice" class="br.com.fiap.entity.Apolice" 
+			column="NUMERO_APOLICE"  cascade="all" fetch="select" />				
+		
+    </class>
+</hibernate-mapping>

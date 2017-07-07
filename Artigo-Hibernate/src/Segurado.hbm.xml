@@ -1,0 +1,20 @@
+<!-- stock.hbm.xml -->
+<hibernate-mapping>
+    <class name="br.com.fiap.entity.Segurado" table="SEGURADO">
+        <id name="id" type="java.lang.Integer" >
+            <column name="ID_SEGURADO" />
+            <generator class="identity" />
+        </id>
+        <property name="nome" type="string">
+            <column name="NOME_SEGURADO" length="100" not-null="true" unique="false" />
+        </property>
+        <property name="cpf" type="string">
+            <column name="CPF_SEGURADO" length="11" not-null="true" unique="true" />
+        </property>
+		<list name="apolices" inverse="true" lazy="true" cascade="all">
+			<key column="ID_SEGURADO" />
+			<list-index></list-index>
+			<one-to-many class="br.com.fiap.entity.Apolice" />
+		</list>
+    </class>
+</hibernate-mapping>
